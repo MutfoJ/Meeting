@@ -125,6 +125,19 @@ h3 { margin: 0 0 8px; font-size: 20px; }
 }
 
 .meta { color: var(--muted); margin: 0 0 10px; font-size: 14px; }
+.detail-title { margin-top: 10px; margin-bottom: 6px; font-weight: 700; color: #334155; }
+
+.detail-list {
+  margin: 0 0 6px 18px;
+  padding: 0;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.detail-list li {
+  margin-bottom: 4px;
+}
 
 img {
   width: 100%;

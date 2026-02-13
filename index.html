@@ -58,12 +58,25 @@
           <h3>Graph 2. FE + baseline controls</h3>
           <p class="meta">Controls: demographics, household composition, marital status, state dummies, education dummies.</p>
           <img src="images/event_study_v1_combined_fig2_base_controls.png" alt="V1 combined baseline controls" loading="lazy" />
+          <p class="meta detail-title">Baseline controls used:</p>
+          <ul class="detail-list">
+            <li>Demographics: <code>age_i</code>, <code>age_sq_i</code></li>
+            <li>Household composition: <code>hh_size</code>, <code>n_children_hh</code></li>
+            <li>Marital status: <code>marital_married_i</code></li>
+            <li>State dummies: <code>state_2</code> to <code>state_16</code></li>
+            <li>Education dummies: <code>casmin_medium_i</code>, <code>casmin_high_i</code></li>
+          </ul>
         </article>
 
         <article class="card">
           <h3>Graph 3. FE + firm/sector controls</h3>
           <p class="meta">Controls: firm-size dummies and sector dummies.</p>
           <img src="images/event_study_v1_combined_fig3_struct_controls.png" alt="V1 combined structural controls" loading="lazy" />
+          <p class="meta detail-title">Firm-size and sector controls used:</p>
+          <ul class="detail-list">
+            <li>Firm-size: <code>firm_size_lt20_i</code>, <code>firm_size_20_to_199_i</code>, <code>firm_size_200_to_1999_i</code>, <code>firm_size_2000_plus_i</code></li>
+            <li>Sectors: <code>agg_nace2_primary_i</code>, <code>agg_nace2_manuf_util_i</code>, <code>agg_nace2_construction_i</code>, <code>agg_nace2_trade_transp_hosp_i</code>, <code>agg_nace2_tech_info_i</code>, <code>agg_nace2_fin_real_i</code>, <code>agg_nace2_prof_admin_i</code>, <code>agg_nace2_public_edu_health_i</code>, <code>agg_nace2_arts_other_i</code></li>
+          </ul>
         </article>
 
         <article class="card">
@@ -83,40 +96,52 @@
         $$</p>
       </div>
 
-      <div class="categories">
-        <div>
-          <h3>Education groups</h3>
-          <p><strong>Low</strong>: <code>casmin_low_i=1</code>, <strong>Medium</strong>: <code>casmin_medium_i=1</code>, <strong>High</strong>: <code>casmin_high_i=1</code>.</p>
-        </div>
-        <div>
-          <h3>Sector groups</h3>
-          <p>Primary, Manufacturing, Construction, TradeHosp, TechInfo, FinReal, ProfAdmin, PublicEdu, ArtsOther (NACE2 aggregates).</p>
-        </div>
-        <div>
-          <h3>Region groups</h3>
-          <p><strong>East</strong>: <code>region_east_i=1</code>, <strong>West</strong>: <code>region_west_i=1</code>.</p>
-        </div>
-      </div>
-
       <div class="grid one-col">
         <article class="card">
           <h3>By Education (Level + Log)</h3>
           <img src="images/event_study_v1_desaggr_education.png" alt="Desagregated by education" loading="lazy" />
+          <p class="meta detail-title">Education categories:</p>
+          <ul class="detail-list">
+            <li><code>Low</code>: CASMIN low (<code>casmin_low_i = 1</code>)</li>
+            <li><code>Medium</code>: CASMIN medium (<code>casmin_medium_i = 1</code>)</li>
+            <li><code>High</code>: CASMIN high (<code>casmin_high_i = 1</code>)</li>
+          </ul>
         </article>
 
         <article class="card">
           <h3>By Sector (Level)</h3>
           <img src="images/event_study_v1_desaggr_sector_level.png" alt="Desagregated by sector level" loading="lazy" />
+          <p class="meta detail-title">Sector categories:</p>
+          <ul class="detail-list">
+            <li><code>Primary</code>: <code>agg_nace2_primary_i = 1</code></li>
+            <li><code>Manufacturing</code>: <code>agg_nace2_manuf_util_i = 1</code></li>
+            <li><code>Construction</code>: <code>agg_nace2_construction_i = 1</code></li>
+            <li><code>TradeHosp</code>: <code>agg_nace2_trade_transp_hosp_i = 1</code></li>
+            <li><code>TechInfo</code>: <code>agg_nace2_tech_info_i = 1</code></li>
+            <li><code>FinReal</code>: <code>agg_nace2_fin_real_i = 1</code></li>
+            <li><code>ProfAdmin</code>: <code>agg_nace2_prof_admin_i = 1</code></li>
+            <li><code>PublicEdu</code>: <code>agg_nace2_public_edu_health_i = 1</code></li>
+            <li><code>ArtsOther</code>: <code>agg_nace2_arts_other_i = 1</code></li>
+          </ul>
         </article>
 
         <article class="card">
           <h3>By Sector (Log)</h3>
           <img src="images/event_study_v1_desaggr_sector_log.png" alt="Desagregated by sector log" loading="lazy" />
+          <p class="meta detail-title">Sector categories (same as level):</p>
+          <ul class="detail-list">
+            <li><code>Primary</code>, <code>Manufacturing</code>, <code>Construction</code>, <code>TradeHosp</code>, <code>TechInfo</code>, <code>FinReal</code>, <code>ProfAdmin</code>, <code>PublicEdu</code>, <code>ArtsOther</code></li>
+          </ul>
         </article>
 
         <article class="card">
           <h3>By Region (East vs West, Level + Log)</h3>
           <img src="images/event_study_v1_desaggr_region_east_west.png" alt="Desagregated by region" loading="lazy" />
+          <p class="meta detail-title">Region categories:</p>
+          <ul class="detail-list">
+            <li><code>East</code>: <code>region_east_i = 1</code></li>
+            <li><code>West</code>: <code>region_west_i = 1</code></li>
+          </ul>
         </article>
       </div>
     </section>

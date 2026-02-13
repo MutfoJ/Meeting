@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V1 Event-Study Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">SOEP / Job-Loss Event Study</p>
+      <h1>V1 Evidence Hub</h1>
+      <p class="subhead">Two-way FE event-study results with clustered SEs. Use tabs to switch between core estimates and heterogeneity cuts.</p>
+      <div class="chips">
+        <span>Window: k = -4,-3,-2,0,1,2,3 (k=-1 omitted)</span>
+        <span>FE: individual + year</span>
+        <span>SE clustered by individual</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="tabs" role="tablist" aria-label="Result sections">
+      <button class="tab is-active" data-tab="main" role="tab" aria-selected="true">Main Effects</button>
+      <button class="tab" data-tab="desag" role="tab" aria-selected="false">Desagregated Effects</button>
+    </nav>
+
+    <section class="panel is-active" id="tab-main" role="tabpanel">
+      <h2>Main Effects</h2>
+      <div class="formula">
+        <p class="formula-title">General specification</p>
+        <p>$$
+          Y_{it}=\sum_{k\in\{-4,-3,-2,0,1,2,3\}}\beta_k D^{(k)}_{it}+\alpha_i+\lambda_t+X_{it}'\gamma+\varepsilon_{it},\quad k=-1\text{ omitted.}
+        $$</p>
+        <p class="muted">$Y_{it}$ is real net labor income (EUR). $X_{it}$ varies by specification.</p>
+      </div>
+
+      <div class="grid one-col">
+        <article class="card">
+          <h3>Graph 1. FE only</h3>
+          <p class="meta">No additional controls.</p>
+          <img src="images/event_study_v1_level_fig1_ind_fe_only.png" alt="V1 level FE only" loading="lazy" />
+        </article>
+
+        <article class="card">
+          <h3>Graph 2. FE + baseline controls</h3>
+          <p class="meta">Controls: demographics, household composition, marital status, state dummies, education dummies.</p>
+          <img src="images/event_study_v1_level_fig2_ind_controls.png" alt="V1 level baseline controls" loading="lazy" />
+        </article>
+
+        <article class="card">
+          <h3>Graph 3. FE + firm/sector controls</h3>
+          <p class="meta">Controls: firm-size dummies and sector dummies.</p>
+          <img src="images/event_study_v1_level_fig3_ind_struct.png" alt="V1 level structural controls" loading="lazy" />
+        </article>
+
+        <article class="card">
+          <h3>Graph 4. FE + full controls</h3>
+          <p class="meta">Controls: baseline + firm-size + sector controls.</p>
+          <img src="images/event_study_v1_level_fig4_ind_full_controls.png" alt="V1 level full controls" loading="lazy" />
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="tab-desag" role="tabpanel">
+      <h2>Desagregated Effects</h2>
+      <div class="formula">
+        <p class="formula-title">General heterogeneity specification</p>
+        <p>$$
+          Y_{it}=\sum_{k\in\{-4,-3,-2,0,1,2,3\}}\beta_{k,g}D^{(k)}_{it}+\alpha_i+\lambda_t+\varepsilon_{it},\quad i\in g,\;k=-1\text{ omitted.}
+        $$</p>
+        <p>$$
+          Y_{it}=\sum_g\sum_{k\neq -1}\theta_{k,g}(D^{(k)}_{it}\times \mathbf{1}\{i\in g\})+\alpha_i+\lambda_t+\varepsilon_{it}
+        $$</p>
+      </div>
+
+      <div class="categories">
+        <div>
+          <h3>Education groups</h3>
+          <p><strong>Low</strong>: <code>casmin_low_i=1</code>, <strong>Medium</strong>: <code>casmin_medium_i=1</code>, <strong>High</strong>: <code>casmin_high_i=1</code>.</p>
+        </div>
+        <div>
+          <h3>Sector groups</h3>
+          <p>Primary, Manufacturing, Construction, TradeHosp, TechInfo, FinReal, ProfAdmin, PublicEdu, ArtsOther (NACE2 aggregates).</p>
+        </div>
+        <div>
+          <h3>Region groups</h3>
+          <p><strong>East</strong>: <code>region_east_i=1</code>, <strong>West</strong>: <code>region_west_i=1</code>.</p>
+        </div>
+      </div>
+
+      <div class="grid one-col">
+        <article class="card">
+          <h3>By Education (Level + Log)</h3>
+          <img src="images/event_study_v1_desaggr_education.png" alt="Desagregated by education" loading="lazy" />
+        </article>
+
+        <article class="card">
+          <h3>By Sector (Level)</h3>
+          <img src="images/event_study_v1_desaggr_sector_level.png" alt="Desagregated by sector level" loading="lazy" />
+        </article>
+
+        <article class="card">
+          <h3>By Sector (Log)</h3>
+          <img src="images/event_study_v1_desaggr_sector_log.png" alt="Desagregated by sector log" loading="lazy" />
+        </article>
+
+        <article class="card">
+          <h3>By Region (East vs West, Level + Log)</h3>
+          <img src="images/event_study_v1_desaggr_region_east_west.png" alt="Desagregated by region" loading="lazy" />
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
